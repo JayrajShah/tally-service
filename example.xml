@@ -1,0 +1,60 @@
+<ENVELOPE>
+  <HEADER>
+    <VERSION>1</VERSION>
+    <STATUS>1</STATUS>
+  </HEADER>
+  <BODY>
+    <DATA>
+      <TALLYMESSAGE xmlns:UDF="TallyUDF">
+        <LEDGER NAME="Cash" RESERVEDNAME="">
+          <GUID>0a1b2c3d-0001-4a5b-b2a7-12d4a6789012</GUID>
+          <PARENT>Cash-in-Hand</PARENT>
+          <OPENINGBALANCE>50000.00</OPENINGBALANCE>
+          <CLOSINGBALANCE>75000.00</CLOSINGBALANCE>
+          <ISBILLWISEON>No</ISBILLWISEON>
+          <ISREVENUE>Yes</ISREVENUE>
+          <AFFECTSSTOCK>No</AFFECTSSTOCK>
+          <LANGUAGENAME.LIST>
+            <NAME.LIST TYPE="String">
+              <NAME>Cash</NAME>
+            </NAME.LIST>
+          </LANGUAGENAME.LIST>
+        </LEDGER>
+      </TALLYMESSAGE>
+
+      <TALLYMESSAGE xmlns:UDF="TallyUDF">
+        <LEDGER NAME="Sales" RESERVEDNAME="">
+          <GUID>0a1b2c3d-0002-4a5b-b2a7-12d4a6789012</GUID>
+          <PARENT>Sales Accounts</PARENT>
+          <OPENINGBALANCE>0.00</OPENINGBALANCE>
+          <CLOSINGBALANCE>150000.00</CLOSINGBALANCE>
+          <ISBILLWISEON>No</ISBILLWISEON>
+          <ISREVENUE>Yes</ISREVENUE>
+          <AFFECTSSTOCK>No</AFFECTSSTOCK>
+          <LANGUAGENAME.LIST>
+            <NAME.LIST TYPE="String">
+              <NAME>Sales</NAME>
+            </NAME.LIST>
+          </LANGUAGENAME.LIST>
+        </LEDGER>
+      </TALLYMESSAGE>
+
+      <TALLYMESSAGE xmlns:UDF="TallyUDF">
+        <LEDGER NAME="Purchases" RESERVEDNAME="">
+          <GUID>0a1b2c3d-0003-4a5b-b2a7-12d4a6789012</GUID>
+          <PARENT>Purchase Accounts</PARENT>
+          <OPENINGBALANCE>0.00</OPENINGBALANCE>
+          <CLOSINGBALANCE>-90000.00</CLOSINGBALANCE>
+          <ISBILLWISEON>No</ISBILLWISEON>
+          <ISREVENUE>Yes</ISREVENUE>
+          <AFFECTSSTOCK>No</AFFECTSSTOCK>
+          <LANGUAGENAME.LIST>
+            <NAME.LIST TYPE="String">
+              <NAME>Purchases</NAME>
+            </NAME.LIST>
+          </LANGUAGENAME.LIST>
+        </LEDGER>
+      </TALLYMESSAGE>
+    </DATA>
+  </BODY>
+</ENVELOPE>
