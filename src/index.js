@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 
 // Configure
-const TALLY_HOST = process.env.TALLY_HOST || "localhost";
+const TALLY_HOST = process.env.TALLY_HOST || "192.168.1.57";
 const TALLY_PORT = process.env.TALLY_PORT || "9000";
 const TALLY_URL = `http://${TALLY_HOST}:${TALLY_PORT}`;
 
@@ -31,22 +31,32 @@ async function postXmlToTally(xml) {
 }
 
 function ledgerListXml() {
-  return `<?xml version="1.0" encoding="UTF-8"?>
-  <ENVELOPE>
-    <HEADER>
-      <TALLYREQUEST>Export Data</TALLYREQUEST>
-    </HEADER>
-    <BODY>
-      <EXPORTDATA>
-        <REQUESTDESC>
-          <REPORTNAME>List of Ledgers</REPORTNAME>
-          <STATICVARIABLES>
-            <SVEXPORTFORMAT>$$SysName:XML</SVEXPORTFORMAT>
-          </STATICVARIABLES>
-        </REQUESTDESC>
-      </EXPORTDATA>
-    </BODY>
-  </ENVELOPE>`;
+  return `
+<ENVELOPE>
+  <HEADER>
+    <TALLYREQUEST>Export Data</TALLYREQUEST>
+  </HEADER>
+  <BODY>
+    <EXPORTDATA>
+      <REQUESTDESC>
+        <REPORTNAME>Sales Register</REPORTNAME>
+        <STATICVARIABLES>
+          <!-- date filters: use YYYYMMDD -->
+          <SVFROMDATE TYPE="Date">20251101</SVFROMDATE>
+          <SVTODATE   TYPE="Date">20251130</SVTODATE>
+
+          <!-- current open company (keeps it dynamic) -->
+          <SVCURRENTCOMPANY>$$CMPNAME</SVCURRENTCOMPANY>
+
+          <!-- request XML output -->
+          <SVEXPORTFORMAT>$$SysName:XML</SVEXPORTFORMAT>
+        </STATICVARIABLES>
+      </REQUESTDESC>
+    </EXPORTDATA>
+  </BODY>
+</ENVELOPE>
+
+`;
 }
 
 // Example endpoint to trigger fetch and return JSON
@@ -73,6 +83,10 @@ app.get("/parse-xml", (req, res) => {
       res.json(result);
     }
   );
+});
+
+app.get("/", (req, res) => {
+  res.send("Pagasus service is running.");
 });
 
 cron.schedule("0 * * * *", async () => {
